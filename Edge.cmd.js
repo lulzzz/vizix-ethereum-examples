@@ -1,4 +1,4 @@
-var src = "contract Edge { address addr; string edgeid; event ThingUpdate ( string edgeid, string epcid, string coordinates, string zone, string status ); function Edge (string _edgeid) { addr = msg.sender; edgeid = _edgeid; } function updateThing (string _epcid, string _coordinates, string _zone) { if ( msg.sender != addr ) throw; if (stringsEqual(_zone, 'POS')) { ThingUpdate (edgeid, _epcid, _coordinates, _zone, 'SOLD'); } else { ThingUpdate (edgeid, _epcid, _coordinates, _zone, 'FREE'); } } function stringsEqual(string memory _a, string memory _b) internal returns (bool) { bytes memory a = bytes(_a); bytes memory b = bytes(_b); if (a.length != b.length) return false; for (uint i = 0; i < a.length; i ++) if (a[i] != b[i]) return false; return true; } }";
+var src = "contract Edge { address owner; string edgeid; string epcid; string coordinates; string zone; string status; event ThingUpdate (string epcid, string coordinates, string zone, string status); function Edge (string _edgeid, string _coordinates, string _zone, string _status) { owner = msg.sender; edgeid= _edgeid; coordinates = _coordinates; zone = _zone; status = _status; } function updateThing (string _epcid, string _coordinates, string _zone, string _status) { if ( msg.sender != owner ) throw; epcid= _epcid; coordinates = _coordinates; zone = _zone; status = _status; if (stringsEqual(zone, 'POS')) { ThingUpdate (epcid, coordinates, zone, 'SOLD'); } else { ThingUpdate (epcid, coordinates, zone, 'FREE'); } } function stringsEqual(string memory _a, string memory _b) internal returns (bool) { bytes memory a = bytes(_a); bytes memory b = bytes(_b); if (a.length != b.length) return false; for (uint i = 0; i < a.length; i ++) if (a[i] != b[i]) return false; return true; } }";
 
 var compiled = web3.eth.compile.solidity(src);
 
@@ -23,4 +23,4 @@ var tracker = myContract.new("AB01", {
     }    
 )
 
-// address: 0xd86ec28c35644296524ba46664d5e386e4ac9ed8
+// address: 0x15c5ebe5739d549f8c43ad4e9fdc8c300e76edc7
