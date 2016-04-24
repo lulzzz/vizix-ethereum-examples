@@ -4,7 +4,7 @@ contract Tracker {
 	string public name;
 	string public location;
 
-    address addr;
+    address public addr;
 
     event UpdatedLocation(string epc, string name, string location);
 
@@ -15,8 +15,12 @@ contract Tracker {
         location = _location;
     }
 
-    function changeLocation(string _location) public {
+    function getLocation() returns (string) {
+        return location;   
+    }
+
+    function updateLocation(string _location) {
         location = _location;
         UpdatedLocation(epc, name, location);
-    }    
+    }
 }

@@ -1,0 +1,16 @@
+Usefull Commands
+================
+
+Check balance
+> eth.getBalance(eth.coinbase)
+> web3.fromWei(eth.getBalance(eth.accounts[0]), "ether");
+
+
+List peers
+> admin.peers
+
+Node Info
+> admin.nodeInfo
+
+Add peer
+> admin.addPeer(".....");
