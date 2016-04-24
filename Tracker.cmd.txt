@@ -1,0 +1,22 @@
+var src = "contract Tracker { string public epc; string public name; string public location; address addr; event UpdatedLocation(string epc, string name, string location); function Tracker(string _epc, string _name, string _location) { addr = msg.sender; epc = _epc; name = _name; location = _location; } function changeLocation(string _location) public { location = _location; UpdatedLocation(epc, name, location); } }"
+
+var compiled = web3.eth.compile.solidity(src);
+
+var myContract = web3.eth.contract(compiled.Tracker.info.abiDefinition);
+
+var tracker = myContract.new("000000AC01","Driller","Assembly Line", {
+        from: web3.eth.accounts[0], 
+        data: compiled.Tracker.code, 
+        gas: 300000
+    }, 
+    function(e, contract) {
+        if(!e) {
+            if(!contract.address) {
+                console.log("Contract waiting to be mined");
+            } else {
+                console.log("Contract mined! Address: " + contract.address);
+                console.log(contract);
+            }
+        }
+    }    
+)
