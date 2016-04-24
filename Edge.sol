@@ -21,8 +21,8 @@ contract Edge {
         }
     }
     
-    function stringsEqual(string _a, string _b) internal returns (bool) {
-		bytes storage a = bytes(_a);
+    function stringsEqual(string memory _a, string memory _b) internal returns (bool) {
+		bytes memory a = bytes(_a);
 		bytes memory b = bytes(_b);
 		if (a.length != b.length)
             return false;
