@@ -14,3 +14,6 @@ Node Info
 
 Add peer
 > admin.addPeer(".....");
+
+Unlock account
+> personal.unlockAccount(eth.accounts[0], "my pwd here")

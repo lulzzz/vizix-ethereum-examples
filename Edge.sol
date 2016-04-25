@@ -17,6 +17,10 @@ contract Edge {
         zone = _zone;
         status = _status;
     }
+    
+    function getEpcId() {
+        return epcid;
+    }
 
     function updateThing (string _epcid, string _coordinates, string _zone, string _status) {
         

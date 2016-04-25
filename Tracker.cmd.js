@@ -25,7 +25,7 @@ var tracker = myContract.new("000000AC01","Driller","Assembly Line", {
 
 
 tracker.goParkingLot.sendTransaction({from:eth.accounts[0]});
-
+tracker.updateLocation.sendTransaction("Other Location", {from:eth.accounts[0]});
 
 
 
