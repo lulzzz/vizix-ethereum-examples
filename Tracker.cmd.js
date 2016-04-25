@@ -1,10 +1,9 @@
-var src = "contract Tracker { string public epc; string public name; string public location; address public addr; event UpdatedLocation(string epc, string name, string location); function Tracker(string _epc, string _name, string _location) { addr = msg.sender; epc = _epc; name = _name; location = _location; } function getLocation() returns (string) { return location; } function updateLocation(string _location) { location = _location; UpdatedLocation(epc, name, location); } }"
+var src = "contract Tracker { string public epc; string public name; string public location; address public addr; event UpdatedLocation(string epc, string name, string location); function Tracker(string _epc, string _name, string _location) { addr = msg.sender; epc = _epc; name = _name; location = _location; } function getLocation() returns (string) { return location; } function updateLocation(string _location) { location = _location; UpdatedLocation(epc, name, location); } function goParkingLot() { location = 'Parking Lot'; UpdatedLocation(epc, name, location); } }"
 
 var compiled = web3.eth.compile.solidity(src);
 
 var myContract = web3.eth.contract(compiled.Tracker.info.abiDefinition);
 
-// note gas had to be increased in order to deploy contract
 var tracker = myContract.new("000000AC01","Driller","Assembly Line", {
         from: web3.eth.accounts[0], 
         data: compiled.Tracker.code, 
@@ -23,6 +22,15 @@ var tracker = myContract.new("000000AC01","Driller","Assembly Line", {
         }
     }    
 )
+
+
+tracker.goParkingLot.sendTransaction({from:eth.accounts[0]});
+
+
+
+
+//registrar.reserve.sendTransaction(name, {from:primary})
+//registrar.setAddress.sendTransaction (name, address, true, {from: primary})
 
 // address: 0xbd2cdb99ff21240bbc40ab1299142c3295bd19f7
 // address: 0x88a01d9d64bbd7a7a2e238a2e48c23edd2841daa

@@ -23,4 +23,9 @@ contract Tracker {
         location = _location;
         UpdatedLocation(epc, name, location);
     }
+
+    function goParkingLot() {
+    	location = 'Parking Lot';
+    	UpdatedLocation(epc, name, location);
+    }
 }

@@ -84,11 +84,6 @@ var tracker = eth.contract([{
 }]
 ).at("0x2e862b88f7f5a75d1d465eec7785961ca89198d6");
 
-var event = tracker.UpdatedLocation().watch({}, '', function(error, result) {
-  console.log("something happened");
-});
-
-
 var event = tracker.allEvents().watch({}, '');
 // or use conference.Deposit() or .Refund()
 event.watch(function (error, result) { 
